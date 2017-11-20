@@ -2,8 +2,8 @@ package com.tdanylchuk.app.model
 
 import java.io.Serializable
 
-class Field(height: Int,
-            width: Int) : Serializable {
+class Field(val height: Int,
+            val width: Int) : Serializable {
 
     private var matrix: Array<Array<Cell>>
 

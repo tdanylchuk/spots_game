@@ -19,6 +19,7 @@
         </activity>
         <activity android:name="com.tdanylchuk.app.MainActivity" />
         <activity android:name="com.tdanylchuk.app.FinishActivity" />
+        <activity android:name=".PictureListActivity" />
 
 
     </application>

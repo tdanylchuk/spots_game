@@ -6,7 +6,7 @@ import com.tdanylchuk.app.R
 
 import com.tdanylchuk.app.model.Cell
 
-class OriginalStrategy : ContentStrategy {
+class OriginalStrategy(finishImageResId: Int, x: Int, y: Int) : AbstractContentStrategy(finishImageResId, x, y) {
 
     override fun applyViewContent(cellButton: Button, cell: Cell, cellSize: Int) {
         cellButton.setBackgroundResource(R.drawable.cell)

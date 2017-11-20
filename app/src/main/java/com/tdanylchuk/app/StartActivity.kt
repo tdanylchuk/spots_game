@@ -18,18 +18,16 @@ class StartActivity : AppCompatActivity() {
     }
 
     private fun bindButtons() {
-        bindButton(R.id.start_original_game_button, ORIGINAL)
-        bindButton(R.id.start_picture_game_button, PICTURE)
+        bindButton(R.id.start_original_game_button, ORIGINAL, MainActivity::class.java)
+        bindButton(R.id.start_picture_game_button, PICTURE, PictureListActivity::class.java)
     }
 
-    private fun bindButton(resId: Int, contentType: ContentType) {
-        val button = findViewById<Button>(resId)
-        button.setOnClickListener { startGame(contentType) }
-    }
-
-    private fun startGame(contentType: ContentType) {
-        val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra(CONTENT_TYPE_PARAM_NAME, contentType.name)
-        startActivity(intent)
+    private fun bindButton(buttonId: Int, contentType: ContentType, clazz: Class<*>) {
+        val button = findViewById<Button>(buttonId)
+        button.setOnClickListener {
+            val intent = Intent(this, clazz)
+            intent.putExtra(CONTENT_TYPE_PARAM_NAME, contentType.name)
+            startActivity(intent)
+        }
     }
 }
