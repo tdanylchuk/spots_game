@@ -2,14 +2,14 @@ package com.tdanylchuk.app
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import com.tdanylchuk.app.IntentConstants.CONTENT_TYPE_PARAM_NAME
 import com.tdanylchuk.app.model.ContentType
 import com.tdanylchuk.app.model.ContentType.ORIGINAL
 import com.tdanylchuk.app.model.ContentType.PICTURE
 
-class StartActivity : AppCompatActivity() {
+
+class StartActivity : AbstractExitApprovalActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

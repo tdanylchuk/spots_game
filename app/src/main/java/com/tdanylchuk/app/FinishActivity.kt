@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import android.widget.ImageView
 
+
 class FinishActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,6 +15,10 @@ class FinishActivity : AppCompatActivity() {
         bindButtons()
         val imageResId = intent.getIntExtra(IntentConstants.IMAGE_RES_ID_PARAM_NAME, -1)
         init(imageResId)
+    }
+
+    override fun onBackPressed() {
+        backToStart()
     }
 
     private fun init(imageResId: Int) {
@@ -28,6 +33,7 @@ class FinishActivity : AppCompatActivity() {
 
     private fun backToStart() {
         val intent = Intent(this, StartActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)
     }
 }

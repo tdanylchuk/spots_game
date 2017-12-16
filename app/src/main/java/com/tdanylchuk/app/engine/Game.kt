@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
-import com.tdanylchuk.app.FinishCheckingListener
+import com.tdanylchuk.app.listener.FinishCheckingListener
 import com.tdanylchuk.app.GameplayConstants
 import com.tdanylchuk.app.R
 import com.tdanylchuk.app.listener.CellClickListener

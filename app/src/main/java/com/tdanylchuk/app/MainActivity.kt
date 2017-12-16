@@ -3,7 +3,6 @@ package com.tdanylchuk.app
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.widget.FrameLayout
@@ -19,7 +18,7 @@ import com.tdanylchuk.app.strategy.OriginalStrategy
 import com.tdanylchuk.app.strategy.PictureStrategy
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AbstractExitApprovalActivity() {
 
     private var gestureDetector: GestureDetector? = null
 
@@ -50,5 +49,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean = gestureDetector!!.onTouchEvent(event)
+
+    override fun getApprovalQuestion(): String {
+        return "Press again if you want to exit current game."
+    }
 
 }
