@@ -6,19 +6,11 @@ class Cell(val x: Int, val y: Int) : Serializable {
 
     var part: Part? = null
 
-    fun isEmpty(): Boolean {
-        return part!!.empty
-    }
+    fun isEmpty(): Boolean = part!!.empty
 
-    fun isNotEmpty(): Boolean {
-        return !part!!.empty
-    }
+    fun isNotEmpty(): Boolean = !part!!.empty
 
-    fun containsProperPart(): Boolean {
-        return part!!.originX == x && part!!.originY == y
-    }
+    fun containsProperPart(): Boolean = part!!.originX == x && part!!.originY == y
 
-    override fun toString(): String {
-        return "Cell[ x[$x] - y[$y] - part[$part]]"
-    }
+    override fun toString(): String = "Cell[ x[$x] - y[$y] - part[$part]]"
 }

@@ -22,5 +22,15 @@ class Field(val height: Int,
         return true
     }
 
+    fun getEmptyCell(): Cell {
+        matrix.forEach { cells ->
+            cells.forEach {
+                if (it.isEmpty()) {
+                    return it
+                }
+            }
+        }
+        throw IllegalStateException("Field should have empty cell")
+    }
 
 }

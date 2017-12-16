@@ -8,7 +8,6 @@ class Part(val originX: Int,
            val view: View,
            val empty: Boolean) : Serializable {
 
-    override fun toString(): String {
-        return "Part[ originalX[$originX] - originalY[$originY]] - empty[$empty]"
-    }
+    override fun toString(): String =
+            "Part[ originalX[$originX] - originalY[$originY]] - empty[$empty]"
 }

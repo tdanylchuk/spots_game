@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.ListView
-import android.widget.Toast
 import com.tdanylchuk.app.model.ContentType
 
 

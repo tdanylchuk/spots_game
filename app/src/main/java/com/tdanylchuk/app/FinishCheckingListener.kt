@@ -5,8 +5,6 @@ import android.animation.AnimatorListenerAdapter
 import android.content.Context
 import android.content.Intent
 import android.support.v4.content.ContextCompat.startActivity
-import android.widget.Toast
-
 import com.tdanylchuk.app.model.Field
 
 class FinishCheckingListener(private val field: Field,
