@@ -1,4 +1,4 @@
-package com.tdanylchuk.app
+package com.tdanylchuk.app.listener
 
 
 interface SwipeListener {

@@ -5,30 +5,27 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.GestureDetector
-import android.view.GestureDetector.SimpleOnGestureListener
 import android.view.MotionEvent
 import android.widget.FrameLayout
-import android.widget.Toast
 import com.tdanylchuk.app.GameplayConstants.FIELD_CELLS_SIZE
+import com.tdanylchuk.app.engine.Game
+import com.tdanylchuk.app.listener.FieldSwipeListener
+import com.tdanylchuk.app.listener.GestureListener
 import com.tdanylchuk.app.model.ContentType
 import com.tdanylchuk.app.model.ContentType.ORIGINAL
 import com.tdanylchuk.app.model.ContentType.PICTURE
-import com.tdanylchuk.app.model.Game
 import com.tdanylchuk.app.strategy.ContentStrategy
 import com.tdanylchuk.app.strategy.OriginalStrategy
 import com.tdanylchuk.app.strategy.PictureStrategy
 
 
-class MainActivity : AppCompatActivity(), SwipeListener {
+class MainActivity : AppCompatActivity() {
 
     private var gestureDetector: GestureDetector? = null
-    private var game: Game? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        gestureDetector = GestureDetector(this, GestureListener(25, 50, this))
 
         val fieldLayout = findViewById<FrameLayout>(R.id.field)
         init(fieldLayout, intent)
@@ -36,8 +33,9 @@ class MainActivity : AppCompatActivity(), SwipeListener {
 
     private fun init(fieldLayout: FrameLayout, intent: Intent) {
         val strategy = getStrategy(fieldLayout.context, intent)
-        game = Game(strategy)
-        game!!.init(fieldLayout)
+        val game = Game(strategy)
+        game.init(fieldLayout)
+        gestureDetector = GestureDetector(this, GestureListener(25, 50, FieldSwipeListener(game)))
     }
 
     private fun getStrategy(context: Context, intent: Intent): ContentStrategy {
@@ -52,26 +50,5 @@ class MainActivity : AppCompatActivity(), SwipeListener {
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean = gestureDetector!!.onTouchEvent(event)
-
-    override fun onSwipeRight() {
-        Toast.makeText(this, "RIGHT", Toast.LENGTH_SHORT).show()
-        game!!.onSwipeRight()
-    }
-
-    override fun onSwipeLeft() {
-        Toast.makeText(this, "LEFT", Toast.LENGTH_SHORT).show()
-        game!!.onSwipeLeft()
-    }
-
-    override fun onSwipeTop() {
-        Toast.makeText(this, "TOP", Toast.LENGTH_SHORT).show()
-        game!!.onSwipeTop()
-    }
-
-    override fun onSwipeBottom() {
-        Toast.makeText(this, "BOTTOM", Toast.LENGTH_SHORT).show()
-        game!!.onSwipeBottom()
-    }
-
 
 }

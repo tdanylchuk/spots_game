@@ -1,11 +1,12 @@
-package com.tdanylchuk.app
+package com.tdanylchuk.app.listener
 
 import android.view.GestureDetector
 import android.view.MotionEvent
+import com.tdanylchuk.app.listener.SwipeListener
 
 class GestureListener(private val swipeThreshold: Int,
-                              private val swipeVelocity: Int,
-                              private val swipeListener: SwipeListener) : GestureDetector.SimpleOnGestureListener() {
+                      private val swipeVelocity: Int,
+                      private val swipeListener: SwipeListener) : GestureDetector.SimpleOnGestureListener() {
 
     override fun onDown(e: MotionEvent): Boolean = true
 

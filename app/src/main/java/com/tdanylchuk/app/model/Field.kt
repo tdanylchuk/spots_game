@@ -8,8 +8,8 @@ class Field(val height: Int,
     private var matrix: Array<Array<Cell>>
 
     init {
-        matrix = Array<Array<Cell>>(height, { x ->
-            Array<Cell>(width, { y -> Cell(x, y) })
+        matrix = Array(height, { x ->
+            Array(width, { y -> Cell(x, y) })
         })
     }
 
@@ -18,11 +18,13 @@ class Field(val height: Int,
     }
 
     fun correct(): Boolean {
-        matrix.forEach { cells -> cells.filterNot { it.containsProperPart() }.forEach { return false } }
+        matrix.forEach { cells ->
+            cells.filterNot { it.containsProperPart() }.forEach { return false }
+        }
         return true
     }
 
-    fun getEmptyCell(): Cell {
+    fun emptyCell(): Cell {
         matrix.forEach { cells ->
             cells.forEach {
                 if (it.isEmpty()) {

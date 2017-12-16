@@ -1,4 +1,4 @@
-package com.tdanylchuk.app.model
+package com.tdanylchuk.app.engine
 
 import android.animation.Animator.AnimatorListener
 import android.animation.AnimatorSet
@@ -8,17 +8,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
-import com.tdanylchuk.app.*
-import com.tdanylchuk.app.GameplayConstants.FIELD_CELLS_SIZE
-import com.tdanylchuk.app.sound.SilentSoundPlayer
-import com.tdanylchuk.app.sound.SoundPlayer
+import com.tdanylchuk.app.FinishCheckingListener
+import com.tdanylchuk.app.GameplayConstants
+import com.tdanylchuk.app.R
+import com.tdanylchuk.app.listener.CellClickListener
+import com.tdanylchuk.app.model.Cell
+import com.tdanylchuk.app.model.Field
+import com.tdanylchuk.app.model.Part
 import com.tdanylchuk.app.strategy.ContentStrategy
 import java.io.Serializable
 
-class Game(private val strategy: ContentStrategy) : Serializable, SwipeListener {
+class Game(private val strategy: ContentStrategy) : Serializable {
 
-    private val field: Field = Field(strategy.getFieldHeight(), strategy.getFieldWidth())
-    private val soundPlayer: SoundPlayer = SilentSoundPlayer()
+    val field: Field = Field(strategy.getFieldHeight(), strategy.getFieldWidth())
     private var cellSize: Int = 50
     private var context: Context? = null
     private var finishCheckListener: AnimatorListener? = null
@@ -68,67 +70,7 @@ class Game(private val strategy: ContentStrategy) : Serializable, SwipeListener 
         return systemService.inflate(R.layout.cell_layout, null)
     }
 
-    override fun onSwipeRight() {
-        val emptyCell = field.getEmptyCell()
-        if (emptyCell.x - 1 >= 0) {
-            moveCell(field.cell(emptyCell.x - 1, emptyCell.y), emptyCell)
-        }
-    }
-
-    override fun onSwipeLeft() {
-        val emptyCell = field.getEmptyCell()
-        if (emptyCell.x + 1 <= FIELD_CELLS_SIZE - 1) {
-            moveCell(field.cell(emptyCell.x + 1, emptyCell.y), emptyCell)
-        }
-    }
-
-    override fun onSwipeTop() {
-        val emptyCell = field.getEmptyCell()
-        if (emptyCell.y + 1 <= FIELD_CELLS_SIZE - 1) {
-            moveCell(field.cell(emptyCell.x, emptyCell.y + 1), emptyCell)
-        }
-    }
-
-    override fun onSwipeBottom() {
-        val emptyCell = field.getEmptyCell()
-        if (emptyCell.y - 1 >= 0) {
-            moveCell(field.cell(emptyCell.x, emptyCell.y - 1), emptyCell)
-        }
-    }
-
-    fun onClick(cell: Cell) {
-        soundPlayer.play()
-        try {
-            if (cell.isNotEmpty()) {
-                val x = cell.x
-                val y = cell.y
-                if (x > 0) {
-                    tryMove(cell, x - 1, y)
-                }
-                if (x < FIELD_CELLS_SIZE - 1) {
-                    tryMove(cell, x + 1, y)
-                }
-                if (y > 0) {
-                    tryMove(cell, x, y - 1)
-                }
-                if (y < FIELD_CELLS_SIZE - 1) {
-                    tryMove(cell, x, y + 1)
-                }
-            }
-        } catch (e: Exception) {
-        }
-    }
-
-    @Throws(Exception::class)
-    private fun tryMove(cell: Cell, x: Int, y: Int) {
-        val checking = field.cell(x, y)
-        if (checking.isEmpty()) {
-            moveCell(cell, checking)
-            throw Exception()
-        }
-    }
-
-    private fun moveCell(cellToMove: Cell, destinationCell: Cell) {
+    fun moveCell(cellToMove: Cell, destinationCell: Cell) {
         val currentPart = cellToMove.part
         val currentView = currentPart!!.view
 
