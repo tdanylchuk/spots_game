@@ -14,8 +14,12 @@ class FinishCheckingListener(private val field: Field,
                              private val context: Context,
                              private val imageResId: Int) : AnimatorListenerAdapter() {
 
+    @Volatile
+    private var isFinished: Boolean = false
+
     override fun onAnimationEnd(animation: Animator) {
-        if (field.correct()) {
+        if (field.correct() && !isFinished) {
+            isFinished = true
             val intent = Intent(context, FinishActivity::class.java)
             intent.putExtra(IntentConstants.IMAGE_RES_ID_PARAM_NAME, imageResId)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)

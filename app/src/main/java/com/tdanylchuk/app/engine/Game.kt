@@ -89,7 +89,7 @@ class Game(private val strategy: ContentStrategy) : Serializable {
 
     private fun createAnimator(): AnimatorSet {
         val animator = AnimatorSet()
-        animator.duration = GameplayConstants.ANIMATION_SPEED.toLong()
+        animator.duration = GameplayConstants.ANIMATION_SPEED
         animator.addListener(finishCheckListener)
         return animator
     }

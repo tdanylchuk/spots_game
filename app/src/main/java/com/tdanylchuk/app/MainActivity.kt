@@ -48,7 +48,10 @@ class MainActivity : AbstractExitApprovalActivity() {
         }
     }
 
-    override fun onTouchEvent(event: MotionEvent): Boolean = gestureDetector!!.onTouchEvent(event)
+    override fun dispatchTouchEvent(event: MotionEvent): Boolean {
+        gestureDetector!!.onTouchEvent(event)
+        return super.dispatchTouchEvent(event)
+    }
 
     override fun getApprovalQuestion(): String {
         return "Press again if you want to exit current game."
