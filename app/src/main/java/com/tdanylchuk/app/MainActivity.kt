@@ -33,8 +33,8 @@ class MainActivity : AbstractExitApprovalActivity() {
     private fun init(fieldLayout: FrameLayout, intent: Intent) {
         val strategy = getStrategy(fieldLayout.context, intent)
         val game = Game(strategy)
-        game.init(fieldLayout)
-        gestureDetector = GestureDetector(this, GestureListener(25, 50, FieldSwipeListener(game)))
+        val manipulator = game.init(fieldLayout)
+        gestureDetector = GestureDetector(this, GestureListener(25, 50, FieldSwipeListener(manipulator)))
     }
 
     private fun getStrategy(context: Context, intent: Intent): ContentStrategy {
